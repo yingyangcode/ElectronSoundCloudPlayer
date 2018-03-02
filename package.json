@@ -4,7 +4,10 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "browserify app/app.js -o app/public/js/bundle.js",
+    "copy-images": "cp -Rf app/public/img/ app/public/js/",
+    "watch": "watchify app/app.js -t babelify -o app/public/js/bundle.js --debug --verbose"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,6 +20,39 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.8.2"
+    "electron": "^1.8.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
+  },
+  "dependencies": {
+    "axios": "^0.9.1",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "classnames": "^2.2.3",
+    "electron-prebuilt": "^0.36.0",
+    "electron-reload": "^0.2.0",
+    "jquery": "^2.2.3",
+    "npm": "^5.7.1",
+    "react": "^0.14.8",
+    "react-autocomplete": "^1.0.0-rc2",
+    "react-dom": "^0.14.7",
+    "react-sound": "^0.4.0",
+    "soundmanager2": "^2.97.20150601-a"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "react",
+            "es2015"
+          ]
+        }
+      ]
+    ]
   }
 }
